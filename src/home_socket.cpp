@@ -2,6 +2,7 @@
 #include "home_messagelistener.h"
 #include <netlink/socket.h>
 #include <netlink/socket_group.h>
+#include <cstdio>
 
 namespace Home
 {

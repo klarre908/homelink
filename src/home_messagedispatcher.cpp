@@ -6,6 +6,7 @@
 #include "home_util.h"
 #include <string>
 #include <rapidxml.hpp>
+#include <cstdio>
 
 namespace Home
 {

@@ -1,6 +1,6 @@
 #include "home_database.h"
-#include <my_global.h>
-#include <mysql.h>
+#include <mysql/my_global.h>
+#include <mysql/mysql.h>
 
 namespace Home
 {

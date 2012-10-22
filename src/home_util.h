@@ -4,6 +4,7 @@
 #include <string>
 #include <sstream>
 #include <vector>
+#include <cstdlib>
 
 namespace Home
 {
@@ -12,7 +13,7 @@ namespace Home
 	public:
 		static inline int s2i(const std::string& str);
 		static inline float s2f(const std::string& str);
-		static inline int Util::split(const std::string& str, char delim
+		static inline int split(const std::string& str, char delim
 				, std::vector<std::string>& elements);
 		static inline void trim(std::string& str);
 
