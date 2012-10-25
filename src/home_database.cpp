@@ -31,7 +31,7 @@ namespace Home
 
 		MYSQL_RES* res_set; /* Create a pointer to recieve the return value.*/
 		MYSQL_ROW row;  /* Assign variable for rows. */
-		mysql_query(mMySql, "SELECT * FROM movies");
+		mysql_query(mMySql, "SELECT * FROM users;");
 
 		unsigned int i = 0; /* Create a counter for the rows */
 		res_set = mysql_store_result(mMySql); /* Receive the result and store it in res_set */

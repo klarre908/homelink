@@ -21,3 +21,5 @@ homelink:
 		-lmysqlpp \
 		-lmysqlclient_r
 
+clean:
+	rm ./homelink

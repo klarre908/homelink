@@ -1,4 +1,5 @@
 #include "home_switchoffaction.h"
+#include "home_util.h"
 
 namespace Home
 {
@@ -11,6 +12,6 @@ namespace Home
 	// -------------------------------------------------------------------------
 	void SwitchOffAction::onAction(Database* db)
 	{
-		//system("tdtool --on id");
+		system(("tdtool --off " + Util::toString(mId)).c_str());
 	}
 }

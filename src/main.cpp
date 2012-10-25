@@ -11,7 +11,7 @@ int main()
 	printf("Home\n");
 	printf("----\n");
 
-	Home::ConfigReader configs("home.conf");
+	Home::ConfigReader configs("/etc/homelink.conf");
 
 	Home::Database db = Home::Database(configs.get("db_host").c_str()
 			, configs.geti("db_port")
@@ -26,7 +26,6 @@ int main()
 	{
 		if(!socket.listen(2000))
 		{
-			
 		}
 	}
 
