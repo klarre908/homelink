@@ -77,7 +77,11 @@ namespace Home
 									else if(sValue == "off")
 										m->addAction(new SwitchOffAction(Util::s2i(sId)));
 									else
+									{
+										printf(sId.c_str());
+										printf(sValue.c_str());
 										m->addAction(new SwitchDimAction(Util::s2i(sId), (unsigned char)Util::s2i(sValue)));
+									}
 								}
 							}
 							else if(t == "get_switches_status")

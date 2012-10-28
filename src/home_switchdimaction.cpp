@@ -1,4 +1,5 @@
 #include "home_switchdimaction.h"
+#include "home_util.h"
 
 namespace Home
 {
@@ -12,6 +13,6 @@ namespace Home
 	// -------------------------------------------------------------------------
 	void SwitchDimAction::onAction(Database* db)
 	{
-		//system("tdtool --dim value id");
+		system(("tdtool -v " + Util::toString(mValue) + " -d " + Util::toString(mId)).c_str());
 	}
 }
