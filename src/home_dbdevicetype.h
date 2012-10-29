@@ -1,80 +1,80 @@
-#ifndef __HOME_DBACTION_H__
-#define __HOME_DBACTION_H__
+#ifndef __HOME_DBDEVICETYPE_H__
+#define __HOME_DBDEVICETYPE_H__
 
 #include <string>
 #include "home_datetime.h"
 
 namespace Home
 {
-	class DbAction
+	class DbDeviceType
 	{
 	public:
-		DbAction();
-		DbAction(const DbAction& dbAction);
+		DbDeviceType();
+		DbDeviceType(const DbDeviceType& dbDeviceType);
 
 		inline void setId(int id);
 		inline void setDateCreated(const DateTime& date);
 		inline void setName(const std::string& name);
-		inline void setContent(const std::string& content);
+		inline void setDescription(const std::string& description);
 
 		inline int getId() const;
 		inline const DateTime& getDateCreated() const;
 		inline const std::string& getName() const;
-		inline const std::string& getContent() const;
+		inline const std::string& getDescription() const;
 
 	private:
 		int mId;
 		DateTime mDateCreated;
 		std::string mName;
-		std::string mContent;
+		std::string mDescription;
 	};
 
 	// -------------------------------------------------------------------------
-	inline void DbAction::setId(int id)
+	inline void DbDeviceType::setId(int id)
 	{
 		mId = id;
 	}
 
 	// -------------------------------------------------------------------------
-	inline void DbAction::setDateCreated(const DateTime& date)
+	inline void DbDeviceType::setDateCreated(const DateTime& date)
 	{
 		mDateCreated = date;
 	}
 
 	// -------------------------------------------------------------------------
-	inline void DbAction::setName(const std::string& name)
+	inline void DbDeviceType::setName(const std::string& name)
 	{
 		mName = name;
 	}
 
 	// -------------------------------------------------------------------------
-	inline void DbAction::setContent(const std::string& content)
+	inline void DbDeviceType::setDescription(const std::string& description)
 	{
-		mContent = content;
+		mDescription = description;
 	}
 
 	// -------------------------------------------------------------------------
-	inline int DbAction::getId() const
+	inline int DbDeviceType::getId() const
 	{
 		return mId;
 	}
 
 	// -------------------------------------------------------------------------
-	inline const DateTime& DbAction::getDateCreated() const
+	inline const DateTime& DbDeviceType::getDateCreated() const
 	{
 		return mDateCreated;
 	}
 
 	// -------------------------------------------------------------------------
-	inline const std::string& DbAction::getName() const
+	inline const std::string& DbDeviceType::getName() const
 	{
 		return mName;
 	}
 
 	// -------------------------------------------------------------------------
-	inline const std::string& DbAction::getContent() const
+	inline const std::string& DbDeviceType::getDescription() const
 	{
-		return mContent;
+		return mDescription;
 	}
 }
 

@@ -9,6 +9,9 @@ namespace Home
 	class DbUser
 	{
 	public:
+		DbUser();
+		DbUser(const DbUser& dbUser);
+
 		inline void setId(int id);
 		inline void setDateCreated(const DateTime& date);
 		inline void setUsername(const std::string& username);
@@ -17,7 +20,7 @@ namespace Home
 		inline void setFirstName(const std::string& firstName);
 		inline void setLastName(const std::string& lastName);
 		inline void setLastLogin(const DateTime& date);
-		inline void setExpired(const DateTime& date);
+		inline void setExpires(const DateTime& date);
 
 		inline int getId() const;
 		inline const DateTime& getDateCreated() const;
@@ -90,7 +93,7 @@ namespace Home
 	}
 
 	// -------------------------------------------------------------------------
-	inline void DbUser::setExpired(const DateTime& date)
+	inline void DbUser::setExpires(const DateTime& date)
 	{
 		mExpires = date;
 	}

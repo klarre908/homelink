@@ -5,6 +5,7 @@
 #include <sstream>
 #include <vector>
 #include <cstdlib>
+#include <md5.h>
 
 namespace Home
 {
@@ -18,7 +19,9 @@ namespace Home
 		static inline void trim(std::string& str);
 
 		template<typename T>
-		static std::string toString(const T& t);
+		static inline std::string toString(const T& t);
+
+		static inline std::string encodeMd5(const std::string& str, const std::string& salt);
 	};
 
 	// -------------------------------------------------------------------------
@@ -63,7 +66,7 @@ namespace Home
 
 	// -------------------------------------------------------------------------
 	template<typename T>
-	std::string Util::toString(const T& t)
+	inline std::string Util::toString(const T& t)
 	{
 		std::stringstream str;
 
@@ -71,6 +74,15 @@ namespace Home
 
 		return str.str();
 	}
+
+	// -------------------------------------------------------------------------
+	inline std::string Util::encodeMd5(const std::string& str, const std::string& salt)
+	{
+		MD5 md5 = MD5(str + salt);
+
+		return md5.finalize().hexdigest();
+	}
+
 }
 
 #endif

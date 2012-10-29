@@ -4,6 +4,7 @@
 
 namespace Home
 {
+	static std::string EMPTY = "";
 	// -------------------------------------------------------------------------
 	ConfigReader::ConfigReader(const char* filename)
 	{
@@ -17,7 +18,7 @@ namespace Home
 		if(itr != mValues.end())
 			return itr->second;
 
-		return "";
+		return EMPTY;
 	}
 
 	// -------------------------------------------------------------------------

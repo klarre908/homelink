@@ -11,6 +11,10 @@ namespace Home
 	class DbSchedule
 	{
 	public:
+		DbSchedule();
+		DbSchedule(const DbSchedule& dbSchedule);
+		~DbSchedule();
+
 		inline void setId(int id);
 		inline void setDateCreated(const DateTime& dateCreated);
 		inline void setMinutes(const std::string& minutes);
