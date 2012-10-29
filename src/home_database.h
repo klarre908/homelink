@@ -2,6 +2,8 @@
 #define __HOME_DATABASE_H__
 
 typedef struct st_mysql MYSQL;
+typedef struct st_mysql_res MYSQL_RES;
+typedef char** MYSQL_ROW;
 
 namespace Home
 {
@@ -15,8 +17,11 @@ namespace Home
 				, const char* db);
 		~Database();
 
-		void openTable(const char* name);
-		void closeTable();
+		int query(const char* command) const;
+		MYSQL_RES* getResult() const;
+		unsigned long long getNumRows(MYSQL_RES* result) const;
+		unsigned int getNumFields(MYSQL_RES* result) const;
+		MYSQL_ROW getRow(MYSQL_RES* result) const;
 
 	private:
 		MYSQL* mMySql;
