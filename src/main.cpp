@@ -9,13 +9,14 @@
 #include "home_dbuser.h"
 #include "home_datetime.h"
 #include "home_util.h"
+#include "home_schedule.h"
 
 int main()
 {
 	printf("Home\n");
 	printf("----\n");
 
-#ifdef _MSC_VER
+#ifdef WIN32
 	Home::ConfigReader configs("homelink.conf");
 #else
 	Home::ConfigReader configs("/etc/homelink.conf");
@@ -26,21 +27,6 @@ int main()
 			, configs.get("db_user").c_str()
 			, configs.get("db_passwd").c_str()
 			, configs.get("db_database").c_str());
-
-	Home::DatabaseManager dm(&db);
-	Home::DbUser user;
-	user.setUsername("admin");
-	user.setFirstName("Joachim");
-	user.setLastName("Klahr");
-	user.setEmail("joachim@klahr.se");
-	user.setPassword(Home::Util::encodeMd5("3vm2wju9", configs.get("db_salt")));
-	dm.insert(user);
-
-	user = Home::DbUser();
-	dm.selectByUsername(user, "admin");
-	user.setUsername("root");
-	dm.update(user);
-	dm.isUsernameTaken("root");
 
 	Home::MessageDispatcher* dispatcher = new Home::MessageDispatcher(&db);
 	Home::Socket socket(4111, dispatcher);

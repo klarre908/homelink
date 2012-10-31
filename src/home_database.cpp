@@ -1,5 +1,5 @@
 #include "home_database.h"
-#ifdef _MSC_VER
+#ifdef WIN32
 #	include "my_global.h"
 #	include "mysql.h"
 #	include "errmsg.h"
@@ -33,20 +33,6 @@ namespace Home
 			printf("Failed to connect to database %s@%s:%d\n", user, address, port);
 
 			return;
-		}
-
-		MYSQL_RES* res_set; /* Create a pointer to recieve the return value.*/
-		MYSQL_ROW row;  /* Assign variable for rows. */
-		mysql_query(mMySql, "SELECT * FROM users;");
-
-		unsigned int i = 0; /* Create a counter for the rows */
-		res_set = mysql_store_result(mMySql); /* Receive the result and store it in res_set */
-		unsigned long long numrows = mysql_num_rows(res_set); /* Create the count to print all rows */
-
-		while ((row = mysql_fetch_row(res_set)) != NULL)
-		{
-			printf("%s\n",row[i] != NULL ?
-			row[i] : "NULL"); /* Print the row data */
 		}
 	}
 
