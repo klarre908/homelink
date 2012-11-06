@@ -14,6 +14,7 @@ namespace Home
 	public:
 		static inline int s2i(const std::string& str);
 		static inline float s2f(const std::string& str);
+		static inline bool s2b(const std::string& str);
 		static inline int split(const std::string& str, char delim
 				, std::vector<std::string>& elements);
 		static inline void trim(std::string& str);
@@ -28,6 +29,12 @@ namespace Home
 	inline int Util::s2i(const std::string& str)
 	{
 		return ::atoi(str.c_str());
+	}
+
+	// -------------------------------------------------------------------------
+	inline bool Util::s2b(const std::string& str)
+	{
+		return ::atoi(str.c_str()) != 0;
 	}
 
 	// -------------------------------------------------------------------------

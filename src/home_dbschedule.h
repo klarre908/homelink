@@ -17,6 +17,7 @@ namespace Home
 
 		inline void setId(int id);
 		inline void setDateCreated(const DateTime& dateCreated);
+		inline void setName(const std::string& name);
 		inline void setMinutes(const std::string& minutes);
 		inline void setHours(const std::string& hours);
 		inline void setDayOfMonth(const std::string& dayOfMonth);
@@ -28,6 +29,7 @@ namespace Home
 
 		inline int getId() const;
 		inline const DateTime& getDateCreated() const;
+		inline const std::string& getName() const;
 		inline const std::string& getMinutes() const;
 		inline const std::string& getHours() const;
 		inline const std::string& getDayOfMonth() const;
@@ -40,6 +42,7 @@ namespace Home
 	private:
 		int mId;
 		DateTime mDateCreated;
+		std::string mName;
 		std::string mMinutes;
 		std::string mHours;
 		std::string mDayOfMonth;
@@ -60,6 +63,12 @@ namespace Home
 	inline void DbSchedule::setDateCreated(const DateTime& dateCreated)
 	{
 		mDateCreated = dateCreated;
+	}
+
+	// -------------------------------------------------------------------------
+	inline void DbSchedule::setName(const std::string& name)
+	{
+		mName = name;
 	}
 
 	// -------------------------------------------------------------------------
@@ -120,6 +129,12 @@ namespace Home
 	inline const DateTime& DbSchedule::getDateCreated() const
 	{
 		return mDateCreated;
+	}
+
+	// -------------------------------------------------------------------------
+	inline const std::string& DbSchedule::getName() const
+	{
+		return mName;
 	}
 
 	// -------------------------------------------------------------------------

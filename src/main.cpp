@@ -7,6 +7,8 @@
 #include "home_configreader.h"
 #include "home_databasemanager.h"
 #include "home_dbuser.h"
+#include "home_dbdevice.h"
+#include "home_dbdevicetype.h"
 #include "home_datetime.h"
 #include "home_util.h"
 #include "home_schedule.h"
