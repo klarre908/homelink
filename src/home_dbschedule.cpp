@@ -18,7 +18,6 @@ namespace Home
 		mDateCreated = dbSchedule.mDateCreated;
 		mMinutes = dbSchedule.mMinutes;
 		mHours = dbSchedule.mHours;
-		mDayOfMonth = dbSchedule.mDayOfMonth;
 		mMonth = dbSchedule.mMonth;
 		mDayOfWeek = dbSchedule.mDayOfWeek;
 		mYear = dbSchedule.mYear;

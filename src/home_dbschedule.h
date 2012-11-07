@@ -20,7 +20,6 @@ namespace Home
 		inline void setName(const std::string& name);
 		inline void setMinutes(const std::string& minutes);
 		inline void setHours(const std::string& hours);
-		inline void setDayOfMonth(const std::string& dayOfMonth);
 		inline void setMonth(const std::string& month);
 		inline void setDayOfWeek(const std::string& dayOfWeek);
 		inline void setYear(const std::string& year);
@@ -32,7 +31,6 @@ namespace Home
 		inline const std::string& getName() const;
 		inline const std::string& getMinutes() const;
 		inline const std::string& getHours() const;
-		inline const std::string& getDayOfMonth() const;
 		inline const std::string& getMonth() const;
 		inline const std::string& getDayOfWeek() const;
 		inline const std::string& getYear() const;
@@ -45,7 +43,6 @@ namespace Home
 		std::string mName;
 		std::string mMinutes;
 		std::string mHours;
-		std::string mDayOfMonth;
 		std::string mMonth;
 		std::string mDayOfWeek;
 		std::string mYear;
@@ -81,12 +78,6 @@ namespace Home
 	inline void DbSchedule::setHours(const std::string& hours)
 	{
 		mHours = hours;
-	}
-
-	// -------------------------------------------------------------------------
-	inline void DbSchedule::setDayOfMonth(const std::string& dayOfMonth)
-	{
-		mDayOfMonth = dayOfMonth;
 	}
 
 	// -------------------------------------------------------------------------
@@ -147,12 +138,6 @@ namespace Home
 	inline const std::string& DbSchedule::getHours() const
 	{
 		return mHours;
-	}
-
-	// -------------------------------------------------------------------------
-	inline const std::string& DbSchedule::getDayOfMonth() const
-	{
-		return mDayOfMonth;
 	}
 
 	// -------------------------------------------------------------------------

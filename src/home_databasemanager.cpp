@@ -170,6 +170,33 @@ namespace Home
 	}
 
 	// -------------------------------------------------------------------------
+	bool DatabaseManager::selectByName(DbSchedule& schedule, const std::string& name) const
+	{
+		char buffer[1024];
+		sprintf(buffer, "SELECT * FROM schedules WHERE name='%s';", name.c_str());
+
+		return select(schedule, buffer);
+	}
+
+	// -------------------------------------------------------------------------
+	bool DatabaseManager::selectById(DbSchedule& schedule, int id) const
+	{
+		char buffer[1024];
+		sprintf(buffer, "SELECT * FROM schedules WHERE id='%d';", id);
+
+		return select(schedule, buffer);
+	}
+
+	// -------------------------------------------------------------------------
+	bool DatabaseManager::selectAll(std::vector<DbSchedule>& schedules) const
+	{
+		char buffer[1024];
+		sprintf(buffer, "SELECT * FROM schedules;");
+
+		return select(schedules, buffer);
+	}
+
+	// -------------------------------------------------------------------------
 	bool DatabaseManager::isUsernameTaken(const std::string& username) const
 	{
 		char buffer[1024];
@@ -322,6 +349,52 @@ namespace Home
 		{
 			if(MYSQL_ROW row = mDb->getRow(result))
 			{
+				if(char* id = row[0])
+					schedule.setId(Util::s2i(id));
+				if(char* date_created = row[1])
+					schedule.setDateCreated(DateTime(date_created));
+				if(char* name = row[2])
+					schedule.setName(name);
+				if(char* minutes = row[3])
+					schedule.setMinutes(minutes);
+				if(char* hours = row[4])
+					schedule.setHours(hours);
+				if(char* day_of_week = row[5])
+					schedule.setDayOfWeek(day_of_week);
+				if(char* month = row[6])
+					schedule.setMonth(month);
+				if(char* year = row[7])
+					schedule.setYear(year);
+				if(char* active = row[8])
+					schedule.setActive(Util::s2b(active));
+				if(char* action_id = row[9])
+				{
+					DbAction* action = new DbAction();
+					if(selectById(*action, Util::s2i(action_id)))
+						schedule.setAction(action);
+					else
+						delete action;
+				}
+			}
+		}
+		else
+			return false;
+
+		return true;
+	}
+
+	// -------------------------------------------------------------------------
+	bool DatabaseManager::select(std::vector<DbSchedule>& schedules, const char* command) const
+	{
+		if(mDb->query(command))
+			return false;
+
+		if(MYSQL_RES* result = mDb->getResult())
+		{
+			while(MYSQL_ROW row = mDb->getRow(result))
+			{
+				schedules.push_back(DbSchedule());
+				DbSchedule& schedule = schedules.back();
 				if(char* id = row[0])
 					schedule.setId(Util::s2i(id));
 				if(char* date_created = row[1])
