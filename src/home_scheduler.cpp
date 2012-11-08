@@ -1,4 +1,6 @@
 #include "home_scheduler.h"
+#include "home_schedule.h"
+#include "home_datetime.h"
 
 namespace Home
 {
@@ -10,52 +12,44 @@ namespace Home
 	// -------------------------------------------------------------------------
 	Scheduler::~Scheduler()
 	{
-		clearEvents();
+		clearSchedules();
 	}
 
 	// -------------------------------------------------------------------------
-	void Scheduler::addEvent(ScheduleEvent* event)
+	void Scheduler::addSchedule(Schedule* event)
 	{
-		mEvents.push_back(event);
+		mSchedules.push_back(event);
 	}
 
 	// -------------------------------------------------------------------------
-	bool Scheduler::removeEvent(int id)
+	void Scheduler::clearSchedules()
 	{
-		for(std::vector<ScheduleEvent*>::iterator i = mEvents.begin()
-				; i != mEvents.end(); ++i)
-		{
-/*			if((*i)->getId() == id)
-			{
-				delete *i;
-				mEvents.erase(i);
-
-				return true;
-			}*/
-		}
-
-		return false;
-	}
-
-	// -------------------------------------------------------------------------
-	void Scheduler::clearEvents()
-	{
-		for(std::vector<ScheduleEvent*>::iterator i = mEvents.begin()
-				; i != mEvents.end(); ++i)
+		for(std::vector<Schedule*>::iterator i = mSchedules.begin()
+				; i != mSchedules.end(); ++i)
 		{
 			delete *i;
 		}
 
-		mEvents.clear();
+		mSchedules.clear();
 	}
 
 	// -------------------------------------------------------------------------
 	void Scheduler::update()
 	{
-		for(std::vector<ScheduleEvent*>::iterator i = mEvents.begin()
-				; i != mEvents.end(); ++i)
+		std::vector<Schedule*> toRun;
+		DateTime date = DateTime(DateTime::now());
+
+		for(std::vector<Schedule*>::iterator i = mSchedules.begin()
+				; i != mSchedules.end(); ++i)
 		{
-			// TODO: Evaluate and execute events here.
+			if((*i)->update(date))
+				toRun.push_back(*i);
+		}
+
+		for(std::vector<Schedule*>::iterator i = toRun.begin()
+				; i != toRun.end(); ++i)
+		{
+			(*i)->run();
 		}
 	}
 }

@@ -5,7 +5,8 @@
 
 namespace Home
 {
-	class ScheduleEvent;
+	class DateTime;
+	class Schedule;
 
 	class Scheduler
 	{
@@ -13,14 +14,13 @@ namespace Home
 		Scheduler();
 		~Scheduler();
 
-		void addEvent(ScheduleEvent* event);
-		bool removeEvent(int id);
-		void clearEvents();
+		void addSchedule(Schedule* schedule);
+		void clearSchedules();
 
 		void update();
 
 	private:
-		std::vector<ScheduleEvent*> mEvents;
+		std::vector<Schedule*> mSchedules;
 	};
 }
 

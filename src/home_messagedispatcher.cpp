@@ -19,7 +19,7 @@ namespace Home
 	// -------------------------------------------------------------------------
 	void MessageDispatcher::onMessage(const char* message, const std::string& fromIp)
 	{
-		std::string msg = message;
+		/*std::string msg = message;
 		std::size_t p = msg.find("\r\n\r\n");
 		if(p != std::string::npos)
 		{
@@ -100,7 +100,7 @@ namespace Home
 				else
 					printf("Invalid message received");
 			}
-		}
+		}*/
 	}
 }
 

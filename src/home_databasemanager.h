@@ -4,8 +4,6 @@
 #include <string>
 #include <vector>
 
-#include "home_dbschedule.h"
-
 namespace Home
 {
 	class DbAction;
@@ -42,7 +40,7 @@ namespace Home
 
 		bool selectByName(DbSchedule& schedule, const std::string& name) const;
 		bool selectById(DbSchedule& schedule, int id) const;
-		bool selectAll(std::vector<DbSchedule>& schedules) const;
+		bool selectAll(std::vector<DbSchedule*>& schedules) const;
 
 		bool isUsernameTaken(const std::string& username) const;
 
@@ -52,7 +50,7 @@ namespace Home
 		bool select(DbDevice& device, const char* command) const;
 		bool select(DbDeviceType& type, const char* command) const;
 		bool select(DbSchedule& schedule, const char* command) const;
-		bool select(std::vector<DbSchedule>& schedules, const char* command) const;
+		bool select(std::vector<DbSchedule*>& schedules, const char* command) const;
 
 		Database* mDb;
 	};

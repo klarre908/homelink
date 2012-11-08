@@ -5,20 +5,23 @@
 
 namespace Home
 {
+	class Action;
+	class DateTime;
+
 	class Schedule
 	{
 	public:
-		enum Day
+		enum WeekDay
 		{
-			DAY_NONE      = 0,
-			DAY_MONDAY    = 1 << 0,
-			DAY_TUESDAY   = 1 << 1,
-			DAY_WEDNESDAY = 1 << 2,
-			DAY_THURSDAY  = 1 << 3,
-			DAY_FRIDAY    = 1 << 4,
-			DAY_SATURDAY  = 1 << 5,
-			DAY_SUNDAY    = 1 << 6,
-			DAY_ALL       = ULONG_MAX,
+			WEEKDAY_NONE      = 0,
+			WEEKDAY_MONDAY    = 1 << 0,
+			WEEKDAY_TUESDAY   = 1 << 1,
+			WEEKDAY_WEDNESDAY = 1 << 2,
+			WEEKDAY_THURSDAY  = 1 << 3,
+			WEEKDAY_FRIDAY    = 1 << 4,
+			WEEKDAY_SATURDAY  = 1 << 5,
+			WEEKDAY_SUNDAY    = 1 << 6,
+			WEEKDAY_ALL       = ULONG_MAX,
 		};
 
 		enum Month
@@ -39,29 +42,30 @@ namespace Home
 			MONTH_ALL       = ULONG_MAX,
 		};
 
-		Schedule();
+		Schedule(Action* action);
 
-		bool isSatisfied(unsigned int minute
-				, unsigned int hour
-				, Day day
-				, Month month) const;
+		bool update(const DateTime& date);
 
 		void setMinute(int minute);
 		void setHour(int hour);
-		void setDaysOfWeek(int days);
+		void setWeekDays(int weekDays);
 		void setMonths(int months);
 
-		void addDayOfWeek(Day day);
+		void addWeekDay(WeekDay weekDay);
 		void addMonth(Month month);
 
-		void removeDayOfWeek(Day day);
+		void removeWeekDay(WeekDay weekDay);
 		void removeMonth(Month month);
+
+		void run();
 
 	private:
 		unsigned int mMinute; // 0-59
 		unsigned int mHour; // 0-23
-		unsigned int mDaysOfWeek;
+		unsigned int mWeekDays;
 		unsigned int mMonths;
+
+		Action* mAction;
 	};
 }
 

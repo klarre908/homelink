@@ -4,11 +4,18 @@
 namespace Home
 {
 	class Database;
+	class Script;
 
 	class Action
 	{
 	public:
-		virtual void onAction(Database* db) = 0;
+		Action(Database* db, Script* script);
+
+		void onAction();
+
+	private:
+		Database* mDb;
+		Script* mScript;
 	};
 }
 

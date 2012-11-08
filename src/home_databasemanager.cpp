@@ -98,7 +98,8 @@ namespace Home
 	}
 
 	// -------------------------------------------------------------------------
-	bool DatabaseManager::selectByName(DbAction& action, const std::string& name) const
+	bool DatabaseManager::selectByName(DbAction& action
+			, const std::string& name) const
 	{
 		char buffer[1024];
 		sprintf(buffer, "SELECT * FROM actions WHERE name='%s';", name.c_str());
@@ -116,7 +117,8 @@ namespace Home
 	}
 
 	// -------------------------------------------------------------------------
-	bool DatabaseManager::selectByUsername(DbUser& user, const std::string& username) const
+	bool DatabaseManager::selectByUsername(DbUser& user
+			, const std::string& username) const
 	{
 		char buffer[1024];
 		sprintf(buffer, "SELECT * FROM users WHERE username='%s';", username.c_str());
@@ -134,7 +136,8 @@ namespace Home
 	}
 
 	// -------------------------------------------------------------------------
-	bool DatabaseManager::selectByName(DbDevice& device, const std::string& name) const
+	bool DatabaseManager::selectByName(DbDevice& device
+			, const std::string& name) const
 	{
 		char buffer[1024];
 		sprintf(buffer, "SELECT * FROM devices WHERE name='%s';", name.c_str());
@@ -152,7 +155,8 @@ namespace Home
 	}
 
 	// -------------------------------------------------------------------------
-	bool DatabaseManager::selectByName(DbDeviceType& type, const std::string& name) const
+	bool DatabaseManager::selectByName(DbDeviceType& type
+			, const std::string& name) const
 	{
 		char buffer[1024];
 		sprintf(buffer, "SELECT * FROM device_types WHERE name='%s';", name.c_str());
@@ -170,7 +174,8 @@ namespace Home
 	}
 
 	// -------------------------------------------------------------------------
-	bool DatabaseManager::selectByName(DbSchedule& schedule, const std::string& name) const
+	bool DatabaseManager::selectByName(DbSchedule& schedule
+			, const std::string& name) const
 	{
 		char buffer[1024];
 		sprintf(buffer, "SELECT * FROM schedules WHERE name='%s';", name.c_str());
@@ -188,7 +193,7 @@ namespace Home
 	}
 
 	// -------------------------------------------------------------------------
-	bool DatabaseManager::selectAll(std::vector<DbSchedule>& schedules) const
+	bool DatabaseManager::selectAll(std::vector<DbSchedule*>& schedules) const
 	{
 		char buffer[1024];
 		sprintf(buffer, "SELECT * FROM schedules;");
@@ -340,7 +345,8 @@ namespace Home
 	}
 
 	// -------------------------------------------------------------------------
-	bool DatabaseManager::select(DbSchedule& schedule, const char* command) const
+	bool DatabaseManager::select(DbSchedule& schedule
+			, const char* command) const
 	{
 		if(mDb->query(command))
 			return false;
@@ -359,12 +365,12 @@ namespace Home
 					schedule.setMinutes(minutes);
 				if(char* hours = row[4])
 					schedule.setHours(hours);
-				if(char* day_of_week = row[5])
-					schedule.setDayOfWeek(day_of_week);
-				if(char* month = row[6])
-					schedule.setMonth(month);
-				if(char* year = row[7])
-					schedule.setYear(year);
+				if(char* days = row[5])
+					schedule.setWeekDays(days);
+				if(char* months = row[6])
+					schedule.setMonths(months);
+				if(char* years = row[7])
+					schedule.setYears(years);
 				if(char* active = row[8])
 					schedule.setActive(Util::s2b(active));
 				if(char* action_id = row[9])
@@ -384,7 +390,8 @@ namespace Home
 	}
 
 	// -------------------------------------------------------------------------
-	bool DatabaseManager::select(std::vector<DbSchedule>& schedules, const char* command) const
+	bool DatabaseManager::select(std::vector<DbSchedule*>& schedules
+			, const char* command) const
 	{
 		if(mDb->query(command))
 			return false;
@@ -393,34 +400,36 @@ namespace Home
 		{
 			while(MYSQL_ROW row = mDb->getRow(result))
 			{
-				schedules.push_back(DbSchedule());
-				DbSchedule& schedule = schedules.back();
+				DbSchedule* schedule = new DbSchedule();
+
 				if(char* id = row[0])
-					schedule.setId(Util::s2i(id));
+					schedule->setId(Util::s2i(id));
 				if(char* date_created = row[1])
-					schedule.setDateCreated(DateTime(date_created));
+					schedule->setDateCreated(DateTime(date_created));
 				if(char* name = row[2])
-					schedule.setName(name);
+					schedule->setName(name);
 				if(char* minutes = row[3])
-					schedule.setMinutes(minutes);
+					schedule->setMinutes(minutes);
 				if(char* hours = row[4])
-					schedule.setHours(hours);
-				if(char* day_of_week = row[5])
-					schedule.setDayOfWeek(day_of_week);
-				if(char* month = row[6])
-					schedule.setMonth(month);
-				if(char* year = row[7])
-					schedule.setYear(year);
+					schedule->setHours(hours);
+				if(char* week_days = row[5])
+					schedule->setWeekDays(week_days);
+				if(char* months = row[6])
+					schedule->setMonths(months);
+				if(char* years = row[7])
+					schedule->setYears(years);
 				if(char* active = row[8])
-					schedule.setActive(Util::s2b(active));
+					schedule->setActive(Util::s2b(active));
 				if(char* action_id = row[9])
 				{
 					DbAction* action = new DbAction();
 					if(selectById(*action, Util::s2i(action_id)))
-						schedule.setAction(action);
+						schedule->setAction(action);
 					else
 						delete action;
 				}
+
+				schedules.push_back(schedule);
 			}
 		}
 		else

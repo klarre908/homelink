@@ -14,15 +14,6 @@ namespace Home
 	// -------------------------------------------------------------------------
 	DbSchedule::DbSchedule(const DbSchedule& dbSchedule)
 	{
-		mId = dbSchedule.mId;
-		mDateCreated = dbSchedule.mDateCreated;
-		mMinutes = dbSchedule.mMinutes;
-		mHours = dbSchedule.mHours;
-		mMonth = dbSchedule.mMonth;
-		mDayOfWeek = dbSchedule.mDayOfWeek;
-		mYear = dbSchedule.mYear;
-		mActive = dbSchedule.mActive;
-		mAction = dbSchedule.mAction;
 	}
 
 	// -------------------------------------------------------------------------

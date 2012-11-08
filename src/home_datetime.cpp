@@ -74,6 +74,23 @@ namespace Home
 	}
 
 	// -------------------------------------------------------------------------
+	unsigned long long DateTime::getSecsSinceEpoch()
+	{
+		time_t t = time(0);
+
+		return (unsigned long long)t;
+	}
+
+	// -------------------------------------------------------------------------
+	int DateTime::getWeekDay() const
+	{
+		time_t t = time(0);
+		struct tm* now = localtime(&t);
+
+		return now->tm_wday;
+	}
+
+	// -------------------------------------------------------------------------
 	std::string DateTime::now()
 	{
 		time_t t = time(0);

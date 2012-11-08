@@ -12,7 +12,6 @@ namespace Home
 	{
 	public:
 		DbSchedule();
-		DbSchedule(const DbSchedule& dbSchedule);
 		~DbSchedule();
 
 		inline void setId(int id);
@@ -20,9 +19,9 @@ namespace Home
 		inline void setName(const std::string& name);
 		inline void setMinutes(const std::string& minutes);
 		inline void setHours(const std::string& hours);
-		inline void setMonth(const std::string& month);
-		inline void setDayOfWeek(const std::string& dayOfWeek);
-		inline void setYear(const std::string& year);
+		inline void setMonths(const std::string& months);
+		inline void setWeekDays(const std::string& days);
+		inline void setYears(const std::string& years);
 		inline void setActive(bool active);
 		inline void setAction(DbAction* action);
 
@@ -31,21 +30,23 @@ namespace Home
 		inline const std::string& getName() const;
 		inline const std::string& getMinutes() const;
 		inline const std::string& getHours() const;
-		inline const std::string& getMonth() const;
-		inline const std::string& getDayOfWeek() const;
-		inline const std::string& getYear() const;
+		inline const std::string& getMonths() const;
+		inline const std::string& getWeekDays() const;
+		inline const std::string& getYears() const;
 		inline bool isActive() const;
 		inline DbAction* getAction() const;
 
 	private:
+		DbSchedule(const DbSchedule& dbSchedule);
+
 		int mId;
 		DateTime mDateCreated;
 		std::string mName;
 		std::string mMinutes;
 		std::string mHours;
-		std::string mMonth;
-		std::string mDayOfWeek;
-		std::string mYear;
+		std::string mMonths;
+		std::string mWeekDays;
+		std::string mYears;
 		bool mActive;
 		DbAction* mAction;
 	};
@@ -81,21 +82,21 @@ namespace Home
 	}
 
 	// -------------------------------------------------------------------------
-	inline void DbSchedule::setMonth(const std::string& month)
+	inline void DbSchedule::setMonths(const std::string& months)
 	{
-		mMonth = month;
+		mMonths = months;
 	}
 
 	// -------------------------------------------------------------------------
-	inline void DbSchedule::setDayOfWeek(const std::string& dayOfWeek)
+	inline void DbSchedule::setWeekDays(const std::string& weekDays)
 	{
-		mDayOfWeek = dayOfWeek;
+		mWeekDays = weekDays;
 	}
 
 	// -------------------------------------------------------------------------
-	inline void DbSchedule::setYear(const std::string& year)
+	inline void DbSchedule::setYears(const std::string& years)
 	{
-		mYear = year;
+		mYears = years;
 	}
 
 	// -------------------------------------------------------------------------
@@ -141,21 +142,21 @@ namespace Home
 	}
 
 	// -------------------------------------------------------------------------
-	inline const std::string& DbSchedule::getMonth() const
+	inline const std::string& DbSchedule::getMonths() const
 	{
-		return mMonth;
+		return mMonths;
 	}
 
 	// -------------------------------------------------------------------------
-	inline const std::string& DbSchedule::getDayOfWeek() const
+	inline const std::string& DbSchedule::getWeekDays() const
 	{
-		return mDayOfWeek;
+		return mWeekDays;
 	}
 
 	// -------------------------------------------------------------------------
-	inline const std::string& DbSchedule::getYear() const
+	inline const std::string& DbSchedule::getYears() const
 	{
-		return mYear;
+		return mYears;
 	}
 
 	// -------------------------------------------------------------------------

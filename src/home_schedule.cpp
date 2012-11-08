@@ -1,29 +1,34 @@
 #include "home_schedule.h"
+#include "home_action.h"
+#include "home_datetime.h"
 
 namespace Home
 {
 	// -------------------------------------------------------------------------
-	Schedule::Schedule()
+	Schedule::Schedule(Action* action)
 		: mMinute(ULONG_MAX)
 		, mHour(ULONG_MAX)
-		, mDaysOfWeek(static_cast<unsigned int>(DAY_ALL))
+		, mWeekDays(static_cast<unsigned int>(WEEKDAY_ALL))
 		, mMonths(static_cast<unsigned int>(MONTH_ALL))
+		, mAction(action)
 	{
 	}
 
 	// -------------------------------------------------------------------------
-	bool Schedule::isSatisfied(unsigned int minute
-			, unsigned int hour
-			, Day day
-			, Month month) const
+	bool Schedule::update(const DateTime& date)
 	{
+		unsigned int minute = (unsigned int)date.getMinutes();
+		unsigned int hour = (unsigned int)date.getHours();
+		unsigned int weekDay = (unsigned int)(1 << (date.getWeekDay() - 1));
+		unsigned int month = (unsigned int)(1 << (date.getMonth() - 1));
+
 		if(mMinute != ULONG_MAX && mMinute != minute)
 			return false;
 
 		if(mHour != ULONG_MAX && mHour != hour)
 			return false;
 
-		if((mDaysOfWeek & day) == 0)
+		if((mWeekDays & weekDay) == 0)
 			return false;
 
 		if((mMonths & month) == 0)
@@ -45,9 +50,9 @@ namespace Home
 	}
 
 	// -------------------------------------------------------------------------
-	void Schedule::setDaysOfWeek(int days)
+	void Schedule::setWeekDays(int weekDays)
 	{
-		mDaysOfWeek = days;
+		mWeekDays = weekDays;
 	}
 
 	// -------------------------------------------------------------------------
@@ -57,9 +62,9 @@ namespace Home
 	}
 
 	// -------------------------------------------------------------------------
-	void Schedule::addDayOfWeek(Day day)
+	void Schedule::addWeekDay(WeekDay weekDay)
 	{
-		mDaysOfWeek |= day;
+		mWeekDays |= weekDay;
 	}
 
 	// -------------------------------------------------------------------------
@@ -69,14 +74,20 @@ namespace Home
 	}
 
 	// -------------------------------------------------------------------------
-	void Schedule::removeDayOfWeek(Day day)
+	void Schedule::removeWeekDay(WeekDay weekDay)
 	{
-		mDaysOfWeek ^= day;
+		mWeekDays ^= weekDay;
 	}
 
 	// -------------------------------------------------------------------------
 	void Schedule::removeMonth(Month month)
 	{
 		mMonths ^= month;
+	}
+
+	// -------------------------------------------------------------------------
+	void Schedule::run()
+	{
+		mAction->onAction();
 	}
 }

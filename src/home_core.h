@@ -6,6 +6,7 @@ namespace Home
 	class Database;
 	class DatabaseManager;
 	class ConfigReader;
+	class Scheduler;
 
 	class Core
 	{
@@ -17,10 +18,13 @@ namespace Home
 
 		void run();
 
+		void updateScheduler();
+
 	private:
 		Database* mDb;
 		DatabaseManager* mDbManager;
 		ConfigReader* mConfigReader;
+		Scheduler* mScheduler;
 	};
 }
 

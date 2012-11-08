@@ -27,6 +27,7 @@ namespace Home
 				, int year);
 		void set(const std::string& formatted);
 
+		static unsigned long long getSecsSinceEpoch();
 		static std::string now();
 		static std::string getFormatted(int seconds
 				, int minutes
@@ -36,6 +37,7 @@ namespace Home
 				, int year);
 		std::string getFormatted() const;
 
+		int getWeekDay() const;
 		inline int getSeconds() const;
 		inline int getMinutes() const;
 		inline int getHours() const;

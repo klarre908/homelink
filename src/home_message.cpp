@@ -27,7 +27,7 @@ namespace Home
 		for(std::vector<Action*>::iterator i = mActions.begin()
 				; i != mActions.end(); ++i)
 		{
-			(*i)->onAction(db);
+			(*i)->onAction();
 			delete *i;
 		}
 
